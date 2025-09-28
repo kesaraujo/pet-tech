@@ -18,10 +18,10 @@ public class PessoaFisicaCollectionRepository {
         pessoas = new LinkedHashSet<>();
 
          PessoaFisica p1 = new PessoaFisica();
-        p1.setCpf("123.456.789-12").setNome("Kesaraujo").setNascimento(LocalDate.of(1979, 05, 31));
+        p1.setCpf("123.456.789-12").setNome("Cesar Araujo Mota").setNascimento(LocalDate.of(1979, 05, 31));
 
         PessoaFisica dependente1 = new PessoaFisica();
-        dependente1.setCpf("12345678998").setNome("Arthurzinho").setNascimento(LocalDate.of(2011, 01, 04));
+        dependente1.setCpf("123.456.789-98").setNome("Arthur Cesar Silva Mota").setNascimento(LocalDate.of(2011, 01, 04));
 
         p1.addDependente(dependente1);
 
@@ -41,5 +41,24 @@ public class PessoaFisicaCollectionRepository {
         p.setId(pessoas.size() + 1L);
         pessoas.add(p);
         return p;
+    }
+
+    public Optional<PessoaFisica> update(PessoaFisica pessoaFisica) {
+        Optional<PessoaFisica> pessoaASerBuscada = this.findById(pessoaFisica.getId());
+
+        if (pessoaASerBuscada.isPresent()) {
+            PessoaFisica pessoa = pessoaASerBuscada.get();
+            pessoa.setCpf(pessoaFisica.getCpf());
+            pessoa.setNome(pessoaFisica.getNome());
+            pessoa.setNascimento(pessoaFisica.getNascimento());
+
+            return  Optional.of(pessoa);
+        }
+
+        return Optional.empty();
+    }
+
+    public void delete(Long id) {
+        pessoas.removeIf(p -> p.getId().equals(id));
     }
 }
