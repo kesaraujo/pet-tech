@@ -3,7 +3,6 @@ package br.com.fiap.pettech.dominio.produto.service;
 import br.com.fiap.pettech.dominio.produto.entity.Produto;
 import br.com.fiap.pettech.dominio.produto.repository.IProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,7 +12,6 @@ import java.util.UUID;
 @Service
 public class ProdutoService {
 
-    @Qualifier("produtoRepository")
     @Autowired
     private IProdutoRepository repository;
 
@@ -31,17 +29,17 @@ public class ProdutoService {
         return produtoSaved;
     }
 
-    public Optional<Produto> update(UUID id, Produto produto) {
-        Optional<Produto> produtoEncontrado = this.findById(id);
+//    public Optional<Produto> update(UUID id, Produto produto) {
+//        Optional<Produto> produtoEncontrado = this.findById(id);
+//
+//        if (produtoEncontrado.isPresent()) {
+//            Produto produtoUpdate = repository.update(id, produto);
+//            return Optional.of(produtoUpdate);
+//        }
+//        return Optional.empty();
+//    }
 
-        if (produtoEncontrado.isPresent()) {
-            Produto produtoUpdate = repository.update(id, produto);
-            return Optional.of(produtoUpdate);
-        }
-        return Optional.empty();
-    }
-
-    public void delete(UUID id) {
-        repository.delete(id);
-    }
+//    public void delete(UUID id) {
+//        repository.delete(id);
+//    }
 }

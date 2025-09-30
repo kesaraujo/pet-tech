@@ -1,10 +1,16 @@
 package br.com.fiap.pettech.dominio.produto.entity;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
+@Table(name = "tb_produto")
 public class Produto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
     private String descricao;
