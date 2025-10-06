@@ -20,7 +20,7 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nome, String descricao, String urlImagem, double preco) {
+    public Produto(String nome, String descricao,   String urlImagem, double preco) {
         id = UUID.randomUUID();
         this.nome = nome;
         this.descricao = descricao;
