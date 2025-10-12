@@ -36,8 +36,8 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> save(@Valid @RequestBody ProdutoDTO dto) {
-        var produtoSaved = produtoService.save(dto);
+    public ResponseEntity<ProdutoDTO> save(@Valid @RequestBody ProdutoDTO produto) {
+        var produtoSaved = produtoService.save(produto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((produtoSaved.getId())).toUri();
         return ResponseEntity.created(uri).body(produtoSaved);
     }

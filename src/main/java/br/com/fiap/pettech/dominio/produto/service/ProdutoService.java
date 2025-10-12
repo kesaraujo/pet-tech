@@ -22,19 +22,18 @@ public class ProdutoService {
     private IProdutoRepository repository;
 
     public Page<ProdutoDTO> findAll(PageRequest pagina) {
-
         var produtos = repository.findAll(pagina);
         return produtos.map(p -> new ProdutoDTO(p));
-
     }
 
     public ProdutoDTO findById(UUID id) {
-        var produto = repository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Produto não encontrado."));
+        var produto = repository.findById(id).orElseThrow(
+                () -> new ControllerNotFoundException("Produto não encontrado.")
+        );
         return new ProdutoDTO(produto);
     }
 
     public ProdutoDTO save(ProdutoDTO dto) {
-
         Produto entity = new Produto();
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());
