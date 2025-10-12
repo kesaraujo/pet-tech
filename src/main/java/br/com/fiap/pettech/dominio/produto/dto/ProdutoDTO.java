@@ -1,15 +1,21 @@
 package br.com.fiap.pettech.dominio.produto.dto;
 
 import br.com.fiap.pettech.dominio.produto.entity.Produto;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;
 
 public class ProdutoDTO {
 
     private UUID id;
+
+    @NotBlank(message = "Informe o nome do produto")
     private String nome;
     private String descricao;
     private String urlImage;
+
+    @Positive(message = "Informe valor do produto")
     private double preco;
 
     public ProdutoDTO() {
@@ -70,6 +76,4 @@ public class ProdutoDTO {
     public void setPreco(double preco) {
         this.preco = preco;
     }
-
-
 }

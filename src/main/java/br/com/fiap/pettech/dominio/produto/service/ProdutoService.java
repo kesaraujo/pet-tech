@@ -2,8 +2,8 @@ package br.com.fiap.pettech.dominio.produto.service;
 
 import br.com.fiap.pettech.dominio.produto.dto.ProdutoDTO;
 import br.com.fiap.pettech.dominio.produto.entity.Produto;
-import br.com.fiap.pettech.dominio.produto.exception.ControllerNotFoundException;
-import br.com.fiap.pettech.dominio.produto.exception.DatabaseException;
+import br.com.fiap.pettech.exception.ControllerNotFoundException;
+import br.com.fiap.pettech.exception.DatabaseException;
 import br.com.fiap.pettech.dominio.produto.repository.IProdutoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +45,15 @@ public class ProdutoService {
         return new ProdutoDTO(produtoSaved);
     }
 
-    public ProdutoDTO update(UUID id, ProdutoDTO produto) {
+    public ProdutoDTO update(UUID id, ProdutoDTO dto) {
 
         try {
 
             Produto buscaProduto = repository.getOne(id);
-            buscaProduto.setNome(produto.getNome());
-            buscaProduto.setDescricao(produto.getDescricao());
-            buscaProduto.setUrlImagem(produto.getUrlImage());
-            buscaProduto.setPreco(produto.getPreco());
+            buscaProduto.setNome(dto.getNome());
+            buscaProduto.setDescricao(dto.getDescricao());
+            buscaProduto.setUrlImagem(dto.getUrlImage());
+            buscaProduto.setPreco(dto.getPreco());
             buscaProduto = repository.save(buscaProduto);
             return new ProdutoDTO(buscaProduto);
 

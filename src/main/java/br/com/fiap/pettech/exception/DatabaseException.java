@@ -1,4 +1,4 @@
-package br.com.fiap.pettech.dominio.produto.exception;
+package br.com.fiap.pettech.exception;
 
 public class DatabaseException extends RuntimeException {
 

@@ -1,32 +1,44 @@
-package br.com.fiap.pettech.dominio.pessoa.entity;
+package br.com.fiap.pettech.dominio.pessoa.dto;
 
-import jakarta.persistence.*;
+import br.com.fiap.pettech.dominio.pessoa.entity.Pessoa;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table(name = "tb_pessoa")
-public class Pessoa {
+public class PessoaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @NotBlank(message = "Informe o nome")
     private String nome;
     private LocalDate nascimento;
+
+    @CPF(message = "CPF inválido")
     private String cpf;
+
+    @Email(message = "Informe e-mail no formato válido.")
     private String email;
 
-    public Pessoa() {
+    public PessoaDTO() {
     }
 
-    public Pessoa(String nome, LocalDate nascimento, String cpf, String email) {
-        id = UUID.randomUUID();
+    public PessoaDTO(UUID id, String nome, LocalDate nascimento, String cpf, String email) {
+        this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
         this.cpf = cpf;
         this.email = email;
+    }
+
+    public PessoaDTO(Pessoa entity) {
+        this.id = entity.getId();
+        this.nome = entity.getNome();
+        this.nascimento = entity.getNascimento();
+        this.cpf = entity.getCpf();;
+        this.email = entity.getEmail();
     }
 
     public UUID getId() {
@@ -67,29 +79,5 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Pessoa{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", nascimento=" + nascimento +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Pessoa pessoa = (Pessoa) o;
-        return Objects.equals(id, pessoa.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }

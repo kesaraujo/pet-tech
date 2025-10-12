@@ -1,4 +1,4 @@
-package br.com.fiap.pettech.dominio.produto.exception;
+package br.com.fiap.pettech.exception;
 
 import java.time.Instant;
 
